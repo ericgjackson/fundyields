@@ -1,0 +1,70 @@
+/* For tabs */
+
+#tabs-min { 
+    background: transparent; 
+    border: none; 
+} 
+#tabs-min .ui-widget-header { 
+    background: transparent; 
+    border: none; 
+    border-bottom: 1px solid #c0c0c0; 
+    -moz-border-radius: 0px; 
+    -webkit-border-radius: 0px; 
+    border-radius: 0px; 
+} 
+#tabs-min .ui-tabs-nav .ui-state-default { 
+    background: transparent; 
+    border: none; 
+} 
+#tabs-min .ui-tabs-nav .ui-state-active { 
+    background: transparent no-repeat bottom center; 
+    /* background: transparent url(uiTabsArrow.png) no-repeat bottom center; */
+    border: none; 
+} 
+#tabs-min .ui-tabs-nav .ui-state-default a { 
+    color: #c0c0c0; 
+} 
+#tabs-min .ui-tabs-nav .ui-state-active a { 
+    color: #459e00; 
+}
+
+/* EGJ addition */
+#tabs-min .ui-tabs-tab {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+/* Gets rid of outline from active tab.  Is this written too broadly? */
+.ui-widget * {
+    outline: none;
+}
+
+/* End of tabs section */
+
+.stats_table {
+    /* border: 1px solid black; */
+    border-collapse: separate;
+    border-spacing: 10px 5px;
+}
+
+/*
+td {
+    margin: 100px 0;
+}
+*/
+
+th {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.help_icon {
+    font-size: 16px;
+    color: #337ab7;  /* Set the icon color */
+    cursor: pointer;  /* Show a pointer cursor when the user hovers over the icon */
+}
+
+.help_icon::before {
+    content: "\f059";  /* Add the fa-question-circle icon */
+    font-family: "FontAwesome";  /* Use the FontAwesome font for the icon */
+}
