@@ -1,3 +1,4 @@
+import sys
 import copy
 from datetime import datetime
 import json
@@ -106,6 +107,7 @@ def get_sec_yield(driver, fund):
         print(f'Unknown company: {company}')
         sec_yield = -1
     print(f'{fund["name"]} ({fund["ticker"].upper()}): {sec_yield}%')
+    sys.stdout.flush()
     return sec_yield
 
 def get_url(fund, tail):
@@ -144,6 +146,7 @@ def scrape_all_funds_with_retries(driver, r, attempts):
     failures = []
     for attempt in range(0, attempts):
         print(f'Trying to scrape data for {len(attempt_funds)} funds')
+        sys.stdout.flush()
         failures = scrape_all_funds(driver, r, attempt_funds)
         if not failures:
             return []
