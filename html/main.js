@@ -7,9 +7,9 @@ var raw_mm_funds = [];
 var raw_fi_funds = [];
 
 // The field the user wants to sort on: 'name', 'ticker', 'sec_yield' or 'te_yield' currently.
-var moneyMarketSortField = null;
+var moneyMarketSortField = 'sec_yield';
 // 'up', 'down' or null
-var moneyMarketSortDirection = null;
+var moneyMarketSortDirection = 'down';
 var fixedIncomeSortField = null;
 var fixedIncomeSortDirection = null;
 // The taxable income of the user.  Used to determine their tax bracket.

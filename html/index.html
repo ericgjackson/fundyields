@@ -27,6 +27,39 @@
 
 <div id="tabs-min-data">
 
+  <p>This site displays yields for numerous money market and bond funds.
+    Optionally enter your tax data below to see tax-equivalent yields.  Visit the Help tab for more
+    details.</p>
+
+  <form action="#">
+    <fieldset>
+      <div style="margin-top: 20px">
+	<label for="state">State:</label>
+	<select name="state" id="state">
+	  <option value="california">California</option>
+	  <option value="new_york">New York</option>
+	  <option selected="selected" value="other">Other</option>
+	</select>
+
+	<label for="filing_status">Filing Status:</label>
+	<select name="filing_status" id="filing_status">
+	  <option value="single">Single</option>
+	  <option value="married_separate">Married, Filing Separately</option>
+	  <option value="married_joint">Married, Filing Jointly</option>
+	  <option value="head_of_household">Head of Household</option>
+	  <option selected="selected">Not specified</option>
+	</select>
+
+	<label for="taxable_income">Taxable Income:</label>
+	<input type="text" name="taxable_income" id="taxable_income" size=10/>
+
+	<label for="investment_income">Investment Income (optional):</label>
+	<input type="text" name="investment_income" id="investment_income" size=10/>
+	<p style='height: 15px' id="summary"></p>
+      </div>
+    </fieldset>
+  </form>
+
   <div>
     <div style="display:inline-block; max-width: 100%;">
       <h2 style="text-align:center">MONEY MARKET</h2>
@@ -46,34 +79,6 @@
       </table>
       </div>
   </div>
-  <hr>
-  <form action="#">
-    <fieldset>
-      <label for="state">State:</label>
-      <select name="state" id="state">
-	<option value="california">California</option>
-	<option value="new_york">New York</option>
-	<option selected="selected" value="other">Other</option>
-      </select>
-      
-      <label for="filing_status">Filing Status:</label>
-      <select name="filing_status" id="filing_status">
-	<option value="single">Single</option>
-	<option value="married_separate">Married, Filing Separately</option>
-	<option value="married_joint">Married, Filing Jointly</option>
-	<option value="head_of_household">Head of Household</option>
-	<option selected="selected">Not specified</option>
-      </select>
-	
-      <label for="taxable_income">Taxable Income:</label>
-      <input type="text" name="taxable_income" id="taxable_income" size=10/>
-      
-      <label for="investment_income">Investment Income (optional):</label>
-      <input type="text" name="investment_income" id="investment_income" size=10/>
-      <p style='height: 15px' id="summary"></p>
-    </fieldset>
-  </form>
-  <hr>
 
 </div> <!-- End of data tab -->
 
