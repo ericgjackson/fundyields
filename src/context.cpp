@@ -8,6 +8,7 @@
 #include "context.h"
 #include "okapi_regex.h"
 
+using namespace okapi;
 using std::string;
 using std::vector;
 

@@ -5,13 +5,13 @@
 #include <string>
 
 #include "context.h"
+#include "okapi_nb_socket_io.h"
+#include "okapi_object.h"
 #include "okapi_server.h"
 
-class NBSocketIO;
-class Object;
 class redisContext;
 
-class FundYieldsThreadData : public ThreadData {
+class FundYieldsThreadData : public okapi::ThreadData {
 public:
   FundYieldsThreadData(void);
   ~FundYieldsThreadData(void);
@@ -20,18 +20,19 @@ private:
   redisContext *redis_context_;
 };
 
-class FundYieldsServer : public Server {
+class FundYieldsServer : public okapi::Server {
  public:
   FundYieldsServer(int num_workers, int port);
   ~FundYieldsServer(void) {}
-  void HandleRequest(const NBSocketIO &socket_io, const ThreadData &thread_data);
+  void HandleRequest(const okapi::NBSocketIO &socket_io, const okapi::ThreadData &thread_data);
  private:
   static const std::string kProtocol;
 
-  void Get(const Object &request, const NBSocketIO &socket_io, const Context &context);
-  void HandleRequest(const std::string &uri, const Object &request, const NBSocketIO &socket_io,
-		     Context &context);
-  std::unique_ptr<ThreadData> GenerateThreadData(void);
+  void Get(const okapi::Object &request, const okapi::NBSocketIO &socket_io,
+	   const Context &context);
+  void HandleRequest(const std::string &uri, const okapi::Object &request,
+		     const okapi::NBSocketIO &socket_io, Context &context);
+  std::unique_ptr<okapi::ThreadData> GenerateThreadData(void);
 
 };
 

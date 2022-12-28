@@ -14,6 +14,7 @@
 #include "okapi_object.h"
 #include "okapi_redis.h"
 
+using namespace okapi;
 using std::exception;
 using std::string;
 using std::pair;
