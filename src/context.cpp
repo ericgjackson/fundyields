@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "context.h"
-#include "okapi_regex.h"
+#include "okapi_text_processing.h"
 
 using namespace okapi;
 using std::string;
@@ -24,7 +24,8 @@ void Context::SetAPIVersion(const string &v) {
   vector<string> comps;
   SplitOn(v, '.', comps);
   if (comps.size() == 2) {
-    sscanf(comps[0].c_str(), "%i", &major_api_version_);
-    sscanf(comps[1].c_str(), "%i", &minor_api_version_);
+    // TODO: check for errors
+    StringToInt(comps[0], major_api_version_);
+    StringToInt(comps[1], minor_api_version_);
   }
 }

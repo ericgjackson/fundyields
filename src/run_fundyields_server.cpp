@@ -1,12 +1,12 @@
 #include <cstdio>
 #include <cstdlib>
-#include <sstream>
 #include <string>
 
 #include "constants.h"
 #include "fundyields_server.h"
+#include "okapi_text_processing.h"
 
-using std::istringstream;
+using namespace okapi;
 using std::string;
 
 static void Usage(const char *prog_name) {
@@ -18,8 +18,7 @@ int main(int argc, char *argv[]) {
   if (argc != 1 && argc != 2) Usage(argv[0]);
   int port = kServerPort;
   if (argc == 2) {
-    istringstream is(argv[1]);
-    is >> port;
+    if (! StringToInt(argv[1], port)) Usage(argv[0]);
   }
   FundYieldsServer server(2, port);
   server.MainLoop();

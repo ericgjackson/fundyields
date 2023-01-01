@@ -3,7 +3,7 @@
 HEADS =	src/constants.h src/context.h src/fundyields_server.h
 
 LIBRARIES = -pthread -lhiredis -lokapi_redis -lokapi_uuid -lokapi_http -lokapi_server \
-	-lokapi_object -lokapi_socket_io -lokapi_regex -lokapi_logging
+	-lokapi_object -lokapi_socket_io -lokapi_text_processing -lokapi_logging
 
 LDFLAGS = 
 IFLAGS = 
@@ -31,6 +31,10 @@ bin/run_fundyields_server:	obj/run_fundyields_server.o $(OBJS) $(HEADS)
 bin/test_fundyields_server:	obj/test_fundyields_server.o $(OBJS) $(HEADS)
 	$(LINKER) $(LDFLAGS) $(CFLAGS) -o bin/test_fundyields_server obj/test_fundyields_server.o \
 	$(OBJS) $(LIBRARIES)
+
+binaries: bin/run_fundyields_server
+
+all: binaries
 
 install: bin/run_fundyields_server
 	install bin/run_fundyields_server /usr/local/bin

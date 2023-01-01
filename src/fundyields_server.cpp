@@ -13,6 +13,7 @@
 #include "okapi_nb_socket_io.h"
 #include "okapi_object.h"
 #include "okapi_redis.h"
+#include "okapi_text_processing.h"
 
 using namespace okapi;
 using std::exception;
@@ -71,7 +72,7 @@ void FundYieldsServer::Get(const Object &request, const NBSocketIO &socket_io,
       Warning("First element returned from SCAN not string\n");
       break;
     }
-    if (sscanf(first_element->str, "%i", &cursor) != 1) {
+    if (! StringToInt(first_element->str, cursor)) {
       Warning("Couldn't parse returned cursor value %s\n", first_element->str);
       break;
     }
