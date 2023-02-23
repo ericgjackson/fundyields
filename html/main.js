@@ -124,7 +124,7 @@ let taxEquivalentYield = function(fund, federalRate, stateRate) {
     // Should we proceed if federalRate is non-null and stateRate is null?
     // Perhaps for users in a state for which we don't have data?  Maybe not.
     if (federalRate === null || stateRate === null) return null;
-    // let debug = (fund['ticker'] === 'vteax');
+    // let debug = (fund['ticker'] === 'vyfxx');
     let debug = false;
     let rawYield = fund['sec_yield'];
     let exempt = fund['exempt'] || [];
@@ -178,6 +178,7 @@ let taxEquivalentYield = function(fund, federalRate, stateRate) {
     let taxEquivalentYield = afterTaxYield / (1.0 - federalRate - stateRate);
     
     if (debug) {
+	console.log('se ' + stateExempt);
 	console.log('afr ' + applicableFederalRate + ' asr ' + applicableStateRate);
 	console.log('aty ' + afterTaxYield);
 	console.log('tey ' + taxEquivalentYield);

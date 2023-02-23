@@ -42,9 +42,9 @@ UnknownURIException::UnknownURIException(const string &uri) {
 }
 
 void FundYieldsServer::Get(const Object &request, const NBSocketIO &socket_io,
-			const Context &context) {
+			   const Context &context) {
   redisContext *redis_context = context.RedisContext();
-  Object response_json{"[", "]"};
+  Object response{"[", "]"};
   int cursor = 0;
   do {
     RedisResponse rr(redis_context, "SCAN %i MATCH *", cursor);
@@ -94,10 +94,11 @@ void FundYieldsServer::Get(const Object &request, const NBSocketIO &socket_io,
       Object fund = Object::FromJSON(data);
       // Add the ticker as a field to the object representing the fund
       fund.AddKVPair("ticker", key);
-      response_json.AddValue(std::move(fund));
+      response.AddValue(std::move(fund));
     }
   } while (cursor != 0);
-  HTTPSendPostResponse(socket_io, kProtocol, 200, "OK", response_json.JSON());
+  HTTPResponse hr(response, kProtocol, 200, "OK", "");
+  hr.Send(socket_io);
 }
 
 void FundYieldsServer::HandleRequest(const std::string &in_uri, const Object &request,
@@ -124,21 +125,20 @@ void FundYieldsServer::HandleRequest(const std::string &in_uri, const Object &re
 }
 
 void FundYieldsServer::HandleRequest(const NBSocketIO &socket_io, const ThreadData &thread_data) {
-  string uri, protocol;
-
-  Object request;
-  try {
-    request = HTTPReceivePostJSON(socket_io, uri, protocol);
-  } catch (HTTPFailedRequestException &e) {
-    // Normal for HTTPReceivePostJSON() to throw; generally just means the client closed the
-    // socket.  Don't print a warning.
-    // TODO: distinguish between exceptions that deserve a warning and those that don't.
-    HTTPSendPostResponse(socket_io, kProtocol, 400, "Badly formed request", "");
+  HTTPRequest http_request(socket_io);
+  if (! http_request.Valid()) {
+    // Normal to get invalid request; generally just means the client closed the socket.  Don't
+    // print a warning.
+    HTTPResponse hr(kProtocol, 400, "Badly formed request", "", "");
+    hr.Send(socket_io);
     return;
   }
+
+  const Object &request = http_request.Request();
   if (request.GetType() != ObjectValueType::OBJECT) {
-    Warning("Expected JSON object in POST request\n");
-    HTTPSendPostResponse(socket_io, kProtocol, 400, "Badly formed request", "");
+    Warning("Expected JSON object in body of HTTP request\n");
+    HTTPResponse hr(kProtocol, 400, "Badly formed request", "", "");
+    hr.Send(socket_io);
     return;
   }
 
@@ -147,10 +147,14 @@ void FundYieldsServer::HandleRequest(const NBSocketIO &socket_io, const ThreadDa
   redisContext *redis_context = wr_thread_data.RedisContext();
   Context context(redis_context);
   try {
-    HandleRequest(uri, request, socket_io, context);
+    HandleRequest(http_request.URI(), request, socket_io, context);
+  } catch (UnknownURIException &e) {
+    HTTPResponse hr(kProtocol, 404, e.what(), "", "");
+    hr.Send(socket_io);
   } catch (exception &e) {
     Warning("Exception: %s\n", e.what());
-    HTTPSendPostResponse(socket_io, kProtocol, 500, e.what(), "");
+    HTTPResponse hr(kProtocol, 500, e.what(), "", "");
+    hr.Send(socket_io);
   }
 }
 

@@ -3,3 +3,4 @@ src/*~
 src/old/*
 __pycache__/
 out.fetch_loop
+geckodriver.log

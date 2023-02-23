@@ -16,7 +16,11 @@ def parse_percentage(str):
 def get_sec_yield_vanguard(driver, ticker):
     # Navigate to the specified URL
     url = 'https://investor.vanguard.com/investment-products/mutual-funds/profile/' + ticker
-    driver.get(url)
+    try:
+        driver.get(url)
+    except TimeoutException:
+        print(f'Timeout trying to fetch URL: {url}')
+        return -1
 
     try:
         element21216111 = driver.find_element(By.XPATH, "//*[@id='price_section']/div[2]/app-closing-price[1]/div[2]/div[1]/div[6]/div[1]/h4[1]/h4[1]")

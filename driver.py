@@ -16,10 +16,12 @@ def get_chromium_driver():
     # Create a Chrome driver with the options we just created
     # driver = webdriver.Chrome(options=chrome_options)
     driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=chromium_options)
-    driver.set_page_load_timeout(10)
+    # 10 seconds was not enough in local testing
+    driver.set_page_load_timeout(30)
     
     # Not sure if we need this.  Better would be to wait for the value we care about.
-    driver.implicitly_wait(10) # seconds
+    # Also not sure if this does anything.
+    driver.implicitly_wait(30) # seconds
 
     return driver
 
