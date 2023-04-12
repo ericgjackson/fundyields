@@ -183,8 +183,8 @@ funds = [
         'cactny_qualified': False,
     },
     {
-        'ticker': 'fcrdx',
-        'tail': '316203835',
+        'ticker': 'fmndx',
+        'tail': '316203843',
         'name': 'Fidelity Conservative Income Municipal Bond Fund',
         'company': 'fidelity',
         'asset_class': 'fixed_income',
