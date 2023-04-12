@@ -23,8 +23,8 @@ funds = [
         'name': 'Vanguard Federal Money Market Fund',
         'company': 'vanguard',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.72,
-        'cactny_qualified': True,
+        'us_govt_obligations': 0.3779,
+        'cactny_qualified': False,
     },
     {
         'ticker': 'vusxx',
@@ -61,7 +61,7 @@ funds = [
         'name': 'Vanguard Total Bond Market Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.3564,
+        'us_govt_obligations': 0.3475,
         'cactny_qualified': False,
     },
     {
@@ -69,15 +69,15 @@ funds = [
         'name': 'Vanguard Intermediate-Term Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.4041,
-        'cactny_qualified': False,
+        'us_govt_obligations': 0.4392,
+        'cactny_qualified': True,
     },
     {
         'ticker': 'vicsx',
         'name': 'Vanguard Intermediate-Term Corporate Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.07,
+        'us_govt_obligations': 0.0039,
         'cactny_qualified': False,
     },
     {
@@ -93,7 +93,7 @@ funds = [
         'name': 'Vanguard Long-Term Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.3235,
+        'us_govt_obligations': 0.3297,
         'cactny_qualified': False,
     },
     {
@@ -101,7 +101,7 @@ funds = [
         'name': 'Vanguard Long-Term Corporate Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.02,
+        'us_govt_obligations': 0.002,
         'cactny_qualified': False,
     },
     {
@@ -109,7 +109,7 @@ funds = [
         'name': 'Vanguard Mortgage-Backed Securities Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.07,
+        'us_govt_obligations': 0.0053,
         'cactny_qualified': False,
     },
     {
@@ -117,7 +117,7 @@ funds = [
         'name': 'Vanguard Short-Term Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.7773,
+        'us_govt_obligations': 0.5736,
         'cactny_qualified': True,
     },
     {
@@ -125,7 +125,7 @@ funds = [
         'name': 'Vanguard Short-Term Corporate Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.03,
+        'us_govt_obligations': 0.0019,
         'cactny_qualified': False,
     },
     {
@@ -148,15 +148,14 @@ funds = [
         'name': 'Vanguard Total International Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.02,
+        'us_govt_obligations': 0.0012,
     },
     {
         'ticker': 'vgavx',
         'name': 'Vanguard Emerging Markets Government Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        # Is this the right figure?  Vanguard page lists "Vanguard Emerging Markets Bond Index".
-        'us_govt_obligations': 0.0082,
+        'us_govt_obligations': 0.0012,
     },
     {
         'ticker': 'vyfxx',
