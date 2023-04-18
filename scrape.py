@@ -44,6 +44,43 @@ def get_sec_yield_vanguard(driver, ticker):
         return -1
 
 def get_sec_yield_fidelity(driver, id):
+    url = f'https://fundresearch.fidelity.com/mutual-funds/performance-and-risk/{id}'
+    try:
+        driver.get(url)
+    except TimeoutException:
+        print(f'Timeout trying to fetch URL: {url}')
+        return -1
+
+    cards = driver.find_elements(By.TAG_NAME, 'mfl-yield-card')
+    if len(cards) != 1:
+        print(f'Unexpected number of card elements: {len(cards)}')
+        return -1
+    card = cards[0]
+    tbodies = card.find_elements(By.TAG_NAME, 'tbody')
+    if len(tbodies) != 1:
+        print(f'Unexpected number of tbody elements: {len(tbodies)}')
+        return -1
+    tbody = tbodies[0]
+    trs = tbody.find_elements(By.TAG_NAME, 'tr')
+    if len(trs) < 2:
+        print(f'Unexpected number of tr elements: {len(trs)}')
+        return -1
+    # Note: want the second row
+    tr = trs[1]
+    tds = tr.find_elements(By.TAG_NAME, 'td')
+    if len(tds) < 2:
+        print(f'Unexpected number of td elements: {len(tds)}')
+        return -1
+    # Note: want the second item
+    td = tds[1]
+    yield_text = td.get_attribute('innerHTML').strip()
+    try:
+        return parse_percentage(yield_text)
+    except ValueError:
+        print(f'Could not parse SEC yield {yield_text} for id {id}')
+        return -1
+
+def old_get_sec_yield_fidelity(driver, id):
     # Navigate to the specified URL
     # url = f'https://fundresearch.fidelity.com/mutual-funds/summary/{id}'
     url = f'https://fundresearch.fidelity.com/mutual-funds/performance-and-risk/{id}'
@@ -124,6 +161,13 @@ def get_url(fund, tail):
     else:
         print(f'Unknown company {fund["company"]} for ticker {fund["ticker"]}')
         return ''
+
+def scrape_fund(driver, ticker):
+    matching = [fund for fund in funds if fund['ticker'] == ticker]
+    if len(matching) == 0:
+        print(f'No fund with ticker {ticker}')
+        return -1
+    return get_sec_yield(driver, matching[0])
 
 def scrape_all_funds(driver, r, scrape_funds):
     failures = []
