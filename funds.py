@@ -31,7 +31,7 @@ funds = [
         'name': 'Vanguard Treasury Money Market Fund',
         'company': 'vanguard',
         'asset_class': 'money_market',
-        'us_govt_obligations': 1.0,
+        'us_govt_obligations': 0.585,
         'cactny_qualified': True,
     },
     {
