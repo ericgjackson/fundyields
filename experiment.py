@@ -38,8 +38,12 @@ def main():
     if len(trs) < 2:
         print(f'Unexpected number of tr elements: {len(trs)}')
         sys.exit(-1)
-    # Note: want the second row
-    tr = trs[1]
+    # For Money Market funds, the second row contains the 7-day yield.  For Bond funds, the
+    # first row contains the 30-day yield.
+    if fund['asset_class'] == 'money_market':
+        tr = trs[1]
+    else:
+        tr = trs[0]
     tds = tr.find_elements(By.TAG_NAME, 'td')
     if len(tds) < 2:
         print(f'Unexpected number of td elements: {len(tds)}')

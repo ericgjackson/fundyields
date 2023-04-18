@@ -43,7 +43,7 @@ def get_sec_yield_vanguard(driver, ticker):
         print(f'Could not parse SEC yield {yield_text} for {ticker}')
         return -1
 
-def get_sec_yield_fidelity(driver, id):
+def get_sec_yield_fidelity(driver, id, fund):
     url = f'https://fundresearch.fidelity.com/mutual-funds/performance-and-risk/{id}'
     try:
         driver.get(url)
@@ -65,13 +65,17 @@ def get_sec_yield_fidelity(driver, id):
     if len(trs) < 2:
         print(f'Unexpected number of tr elements: {len(trs)}')
         return -1
-    # Note: want the second row
-    tr = trs[1]
+    # For Money Market funds, the second row contains the 7-day yield.  For Bond funds, the
+    # first row contains the 30-day yield.
+    if fund['asset_class'] == 'money_market':
+        tr = trs[1]
+    else:
+        tr = trs[0]
     tds = tr.find_elements(By.TAG_NAME, 'td')
     if len(tds) < 2:
         print(f'Unexpected number of td elements: {len(tds)}')
         return -1
-    # Note: want the second item
+    # Want the second item
     td = tds[1]
     yield_text = td.get_attribute('innerHTML').strip()
     try:
@@ -141,7 +145,7 @@ def get_sec_yield(driver, fund):
     if company == 'vanguard':
         sec_yield = get_sec_yield_vanguard(driver, tail)
     elif company == 'fidelity':
-        sec_yield = get_sec_yield_fidelity(driver, tail)
+        sec_yield = get_sec_yield_fidelity(driver, tail, fund)
     elif company == 'schwab':
         sec_yield = get_sec_yield_schwab(driver, tail)
     else:
