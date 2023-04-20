@@ -196,7 +196,7 @@ funds = [
         'name': 'Fidelity Money Market Fund - Premium Class',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.0358,
+        'us_govt_obligations': 0,
         'cactny_qualified': False,
     },
     {
@@ -282,6 +282,15 @@ funds = [
         'company': 'fidelity',
         'asset_class': 'money_market',
         'exempt': ['massachusetts', 'federal'],
+    },
+    {
+        'ticker': 'sprxx',
+        'tail': '31617H201',
+        'name': 'Fidelity Money Market Fund',
+        'company': 'fidelity',
+        'asset_class': 'money_market',
+        'us_govt_obligations': 0,
+        'cactny_qualified': False,
     },
     {
         'ticker': 'snsxx',
