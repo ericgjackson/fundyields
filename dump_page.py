@@ -15,7 +15,8 @@ def main():
         sys.exit(-1)
     fund = matching[0]
     tail = fund.get('tail', fund['ticker'])
-    url = f'https://fundresearch.fidelity.com/mutual-funds/performance-and-risk/{tail}'
+    # url = f'https://fundresearch.fidelity.com/mutual-funds/performance-and-risk/{tail}'
+    url = f'https://www.schwabassetmanagement.com/products/{ticker}'
     try:
         driver.get(url)
     except TimeoutException:

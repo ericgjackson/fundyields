@@ -177,7 +177,11 @@ def scrape_all_funds(driver, r, scrape_funds):
     failures = []
 
     for fund in scrape_funds:
-        sec_yield = get_sec_yield(driver, fund)
+        try:
+            sec_yield = get_sec_yield(driver, fund)
+        except Exception:
+            print(f'Caught exception processing {fund["ticker"]}')
+            sec_yield = -1
         if sec_yield == -1:
             failures.append(fund['ticker'])
             continue
