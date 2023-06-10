@@ -3,7 +3,93 @@
 #   MCDXX (Blackrock)
 #   MOFXX (Federated Hermes).  Cannot find 7-day yield.
 #   FTXXX (Goldman Sachs)
-funds = [
+schwab_funds = [
+    {
+        'ticker': 'snsxx',
+        'name': 'Schwab U.S. Treasury Money Fund - Investor Shares',
+        'company': 'schwab',
+        'asset_class': 'money_market',
+        'us_govt_obligations': 0.8404,
+        'cactny_qualified': True,
+    },
+    {
+        'ticker': 'snoxx',
+        'name': 'Schwab Treasury Obligations Money Fund - Investor Shares',
+        'company': 'schwab',
+        'asset_class': 'money_market',
+        'us_govt_obligations': 0.6905,
+        'cactny_qualified': False,
+    },
+    {
+        'ticker': 'snvxx',
+        'name': 'Schwab Government Money Fund - Investor Shares',
+        'company': 'schwab',
+        'asset_class': 'money_market',
+        'us_govt_obligations': 0.3727,
+        'cactny_qualified': False,
+    },
+    {
+        'ticker': 'swvxx',
+        'name': 'Schwab Value Advantage Money Fund - Investor Shares',
+        'company': 'schwab',
+        'asset_class': 'money_market',
+        'us_govt_obligations': 0.0190,
+        'cactny_qualified': False,
+    },
+    {
+        'ticker': 'swtxx',
+        'name': 'Schwab Municipal Money Fund - Investor Shares',
+        'company': 'schwab',
+        'asset_class': 'money_market',
+        'exempt': ['federal'],
+    },
+    {
+        'ticker': 'swwxx',
+        'name': 'Schwab AMT Tax-Free Money Fund - Investor Shares',
+        'company': 'schwab',
+        'asset_class': 'money_market',
+        'exempt': ['federal'],
+    },
+    {
+        'ticker': 'swkxx',
+        'name': 'Schwab California Municipal Money Fund - Investor Shares',
+        'company': 'schwab',
+        'asset_class': 'money_market',
+        'exempt': ['california', 'federal'],
+    },
+    {
+        'ticker': 'swyxx',
+        'name': 'Schwab New York Municipal Money Fund - Investor Shares',
+        'company': 'schwab',
+        'asset_class': 'money_market',
+        'exempt': ['new_york', 'federal'],
+    },
+    {
+        'ticker': 'swcax',
+        'name': 'Schwab California Tax-Free Bond Fund',
+        'company': 'schwab',
+        'asset_class': 'fixed_income',
+        'exempt': ['california', 'federal'],
+    },
+    {
+        'ticker': 'swsbx',
+        'name': 'Schwab Short-Term Bond Index Fund',
+        'company': 'schwab',
+        'asset_class': 'fixed_income',
+        'us_govt_obligations': 0.4584,
+        'cactny_qualified': True,
+    },
+    {
+        'ticker': 'swagx',
+        'name': 'Schwab U.S. Aggregate Bond Index Fund',
+        'company': 'schwab',
+        'asset_class': 'fixed_income',
+        'us_govt_obligations': 0.2455,
+        'cactny_qualified': False,
+    }
+]
+
+vanguard_funds = [
     {
         'ticker': 'vctxx',
         'name': 'Vanguard California Municipal Money Market Fund',
@@ -163,7 +249,10 @@ funds = [
         'company': 'vanguard',
         'asset_class': 'money_market',
         'exempt': ['new_york', 'federal'],
-    },
+    }
+]
+
+fidelity_funds = [
     {
         'ticker': 'flgxx',
         'tail': '31617H888',
@@ -291,88 +380,7 @@ funds = [
         'asset_class': 'money_market',
         'us_govt_obligations': 0,
         'cactny_qualified': False,
-    },
-    {
-        'ticker': 'snsxx',
-        'name': 'Schwab U.S. Treasury Money Fund - Investor Shares',
-        'company': 'schwab',
-        'asset_class': 'money_market',
-        'us_govt_obligations': 0.8404,
-        'cactny_qualified': True,
-    },
-    {
-        'ticker': 'snoxx',
-        'name': 'Schwab Treasury Obligations Money Fund - Investor Shares',
-        'company': 'schwab',
-        'asset_class': 'money_market',
-        'us_govt_obligations': 0.6905,
-        'cactny_qualified': False,
-    },
-    {
-        'ticker': 'snvxx',
-        'name': 'Schwab Government Money Fund - Investor Shares',
-        'company': 'schwab',
-        'asset_class': 'money_market',
-        'us_govt_obligations': 0.3727,
-        'cactny_qualified': False,
-    },
-    {
-        'ticker': 'swvxx',
-        'name': 'Schwab Value Advantage Money Fund - Investor Shares',
-        'company': 'schwab',
-        'asset_class': 'money_market',
-        'us_govt_obligations': 0.0190,
-        'cactny_qualified': False,
-    },
-    {
-        'ticker': 'swtxx',
-        'name': 'Schwab Municipal Money Fund - Investor Shares',
-        'company': 'schwab',
-        'asset_class': 'money_market',
-        'exempt': ['federal'],
-    },
-    {
-        'ticker': 'swwxx',
-        'name': 'Schwab AMT Tax-Free Money Fund - Investor Shares',
-        'company': 'schwab',
-        'asset_class': 'money_market',
-        'exempt': ['federal'],
-    },
-    {
-        'ticker': 'swkxx',
-        'name': 'Schwab California Municipal Money Fund - Investor Shares',
-        'company': 'schwab',
-        'asset_class': 'money_market',
-        'exempt': ['california', 'federal'],
-    },
-    {
-        'ticker': 'swyxx',
-        'name': 'Schwab New York Municipal Money Fund - Investor Shares',
-        'company': 'schwab',
-        'asset_class': 'money_market',
-        'exempt': ['new_york', 'federal'],
-    },
-    {
-        'ticker': 'swcax',
-        'name': 'Schwab California Tax-Free Bond Fund',
-        'company': 'schwab',
-        'asset_class': 'fixed_income',
-        'exempt': ['california', 'federal'],
-    },
-    {
-        'ticker': 'swsbx',
-        'name': 'Schwab Short-Term Bond Index Fund',
-        'company': 'schwab',
-        'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.4584,
-        'cactny_qualified': True,
-    },
-    {
-        'ticker': 'swagx',
-        'name': 'Schwab U.S. Aggregate Bond Index Fund',
-        'company': 'schwab',
-        'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.2455,
-        'cactny_qualified': False,
-    },
+    }
 ]
+
+funds = vanguard_funds + schwab_funds + fidelity_funds
