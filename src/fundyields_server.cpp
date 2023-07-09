@@ -101,6 +101,27 @@ void FundYieldsServer::Get(const Object &request, const NBSocketIO &socket_io,
   hr.Send(socket_io);
 }
 
+void FundYieldsServer::Set(const Object &request, const NBSocketIO &socket_io,
+			   const Context &context) {
+  redisContext *redis_context = context.RedisContext();
+  const auto &funds = request["funds"];
+  int num_funds = funds.NumChildren();
+  vector<string> successful_tickers;
+  for (int i = 0; i < num_funds; ++i) {
+    const auto &fund = funds[i];
+    const string &ticker = fund["ticker"];
+    try {
+      RedisResponse rr(redis_context, "SET %s %s", ticker.c_str(), fund.JSON().c_str());
+      successful_tickers.push_back(ticker);
+    } catch (RedisException &e) {
+      Warning("Exception %s setting ticker %s\n", e.what(), ticker.c_str());
+    }
+  }
+  Object response(successful_tickers);
+  HTTPResponse hr(response, kProtocol, 200, "OK", "");
+  hr.Send(socket_io);
+}
+
 void FundYieldsServer::HandleRequest(const std::string &in_uri, const Object &request,
 				  const NBSocketIO &socket_io, Context &context) {
   // In testing, we sometimes send API requests to /fundyields2/.
@@ -116,6 +137,8 @@ void FundYieldsServer::HandleRequest(const std::string &in_uri, const Object &re
 
   if (uri == "/fundyields/api/get") {
     Get(request, socket_io, context);
+  } else if (uri == "/fundyields/api/set") {
+    Set(request, socket_io, context);
   } else {
     Warning("Unknown URI: %s\n", uri.c_str());
     // Might want to return status of 404 rather than 400 for this exception

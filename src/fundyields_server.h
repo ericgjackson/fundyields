@@ -30,6 +30,8 @@ class FundYieldsServer : public okapi::Server {
 
   void Get(const okapi::Object &request, const okapi::NBSocketIO &socket_io,
 	   const Context &context);
+  void Set(const okapi::Object &request, const okapi::NBSocketIO &socket_io,
+	   const Context &context);
   void HandleRequest(const std::string &uri, const okapi::Object &request,
 		     const okapi::NBSocketIO &socket_io, Context &context);
   std::unique_ptr<okapi::ThreadData> GenerateThreadData(void);
