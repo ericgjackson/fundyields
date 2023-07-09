@@ -2,6 +2,7 @@ import sys
 import copy
 from datetime import datetime
 import json
+import requests
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from funds import funds
@@ -173,9 +174,10 @@ def scrape_fund(driver, ticker):
         return -1
     return get_sec_yield(driver, matching[0])
 
-def scrape_all_funds(driver, r, scrape_funds):
+def scrape_all_funds(driver, remote_host, r, scrape_funds):
     failures = []
 
+    records = []
     for fund in scrape_funds:
         try:
             sec_yield = get_sec_yield(driver, fund)
@@ -194,17 +196,28 @@ def scrape_all_funds(driver, r, scrape_funds):
         record['updated'] = now
         json_record = json.dumps(record)
         print(record)
-        r.set(fund['ticker'], json_record)
+        if remote_host:
+            records.append(record)
+        else:
+            r.set(fund['ticker'], json_record)
 
+    if remote_host:
+        request = {'api': '1.0', 'funds': records}
+        headers = {'Content-Type': 'application/json'}
+        response = requests.post(f'https://{remote_host}/fundyields/api/set',
+                           data=json.dumps(request), headers=headers)
+        print(response.status_code)
+        print(response.text)
+        
     return failures
 
-def scrape_all_funds_with_retries(driver, r, attempts):
+def scrape_all_funds_with_retries(driver, remote_host, r, attempts):
     attempt_funds = funds
     failures = []
     for attempt in range(0, attempts):
         print(f'Trying to scrape data for {len(attempt_funds)} funds')
         sys.stdout.flush()
-        failures = scrape_all_funds(driver, r, attempt_funds)
+        failures = scrape_all_funds(driver, remote_host, r, attempt_funds)
         if not failures:
             return []
         attempt_funds = [f for f in funds if f['ticker'] in failures]
