@@ -44,7 +44,8 @@ UnknownURIException::UnknownURIException(const string &uri) {
 void FundYieldsServer::Get(const Object &request, const NBSocketIO &socket_io,
 			   const Context &context) {
   redisContext *redis_context = context.RedisContext();
-  Object response{"[", "]"};
+  Object funds{"[", "]"};
+
   int cursor = 0;
   do {
     RedisResponse rr(redis_context, "SCAN %i MATCH *", cursor);
@@ -89,14 +90,20 @@ void FundYieldsServer::Get(const Object &request, const NBSocketIO &socket_io,
 	break;
       }
       string key = element->str;
+      if (key == "updated") continue;
       RedisResponse rr(redis_context, "GET %s", key.c_str());
       string data = rr;
       Object fund = Object::FromJSON(data);
       // Add the ticker as a field to the object representing the fund
       fund.AddKVPair("ticker", key);
-      response.AddValue(std::move(fund));
+      funds.AddValue(std::move(fund));
     }
   } while (cursor != 0);
+
+  RedisResponse rr(redis_context, "GET updated");
+  string date = rr;
+  Object response{"updated", date, "funds", funds};
+
   HTTPResponse hr(response, kProtocol, 200, "OK", "");
   hr.Send(socket_io);
 }

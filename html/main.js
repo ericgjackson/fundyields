@@ -552,11 +552,12 @@ let renderPage = function() {
 };
 
 let getResponse = function(data) {
-    console.log(data);
+    let funds = data['funds'];
+    let updated = data['updated'];
 
     raw_mm_funds = [];
     raw_fi_funds = [];
-    data.forEach(function(fund) {
+    funds.forEach(function(fund) {
 	if (fund['asset_class'] === 'money_market') {
 	    raw_mm_funds.push(fund);
 	} else if (fund['asset_class'] === 'fixed_income') {
