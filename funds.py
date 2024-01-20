@@ -109,7 +109,7 @@ vanguard_funds = [
         'name': 'Vanguard Federal Money Market Fund',
         'company': 'vanguard',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.3779,
+        'us_govt_obligations': 0.45,
         'cactny_qualified': False,
     },
     {
@@ -117,7 +117,7 @@ vanguard_funds = [
         'name': 'Vanguard Treasury Money Market Fund',
         'company': 'vanguard',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.585,
+        'us_govt_obligations': 0.8,
         'cactny_qualified': True,
     },
     {

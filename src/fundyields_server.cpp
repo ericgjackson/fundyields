@@ -104,6 +104,15 @@ void FundYieldsServer::Get(const Object &request, const NBSocketIO &socket_io,
 void FundYieldsServer::Set(const Object &request, const NBSocketIO &socket_io,
 			   const Context &context) {
   redisContext *redis_context = context.RedisContext();
+  string date;
+  if (request.Contains("updated")) {
+    date = (string)request["updated"];
+    try {
+      RedisResponse rr(redis_context, "SET updated %s", date.c_str());
+    } catch (RedisException &e) {
+      Warning("Exception %s setting updated %s\n", e.what(), date.c_str());
+    }
+  }
   const auto &funds = request["funds"];
   int num_funds = funds.NumChildren();
   vector<string> successful_tickers;
