@@ -5,6 +5,7 @@ import {makeAjaxRequest} from './ajax.js';
 // sorting preferences.
 var raw_mm_funds = [];
 var raw_fi_funds = [];
+var updated = '';
 
 // The field the user wants to sort on: 'name', 'ticker', 'sec_yield' or 'te_yield' currently.
 var moneyMarketSortField = 'sec_yield';
@@ -343,6 +344,8 @@ let renderPage = function() {
     let row, cell;
     let sortIcon;
 
+    $('#updated').html(updated);
+
     // Render the table header of each table first
     
     row = $('<tr>');
@@ -553,7 +556,7 @@ let renderPage = function() {
 
 let getResponse = function(data) {
     let funds = data['funds'];
-    let updated = data['updated'];
+    updated = data['updated'];
 
     raw_mm_funds = [];
     raw_fi_funds = [];
