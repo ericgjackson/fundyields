@@ -192,7 +192,7 @@ let taxEquivalentYield = function(fund, federalRate, stateRate) {
 let getRates = function() {
     // Check that taxableIncome non-negative?  And is a number?
     let valid = taxableIncome !== null && taxableIncome != NaN &&
-	states.includes(state) && filingStatus.includes(filingStatus)
+	states.includes(state) && filingStatuses.includes(filingStatus)
     if (! valid) return [null, null];
 
     let federalRate;
@@ -639,11 +639,11 @@ var main = function() {
 
     $("#tabs-min").tabs();
     
-    $('#state').selectmenu({
+    $('#state-button').selectmenu({
 	width: 200,
 	change: stateChange
     });
-    $('#filing_status').selectmenu({
+    $('#filing_status-button').selectmenu({
 	width: 200,
 	change: filingStatusChange
     });
@@ -653,12 +653,12 @@ var main = function() {
     state = Cookies.get('state');
     if (state) {
 	// Can I do this when the selectmenu is initialized above?
-	$('#state').val(state).selectmenu("refresh");
+	$('#state-button').val(state).selectmenu("refresh");
     }
     filingStatus = Cookies.get('filingStatus');
     if (filingStatus) {
 	// Can I do this when the selectmenu is initialized above?
-	$('#filing_status').val(filingStatus).selectmenu("refresh");
+	$('#filing_status-button').val(filingStatus).selectmenu("refresh");
     }
 
     let taxableIncomeStr = Cookies.get('taxableIncome');
