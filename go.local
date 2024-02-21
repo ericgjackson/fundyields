@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python3 fetch_loop.py --host fundyields.com >& out.fetch_loop &
