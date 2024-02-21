@@ -41,8 +41,7 @@ UnknownURIException::UnknownURIException(const string &uri) {
   message_ += "\"";
 }
 
-void FundYieldsServer::Get(const Object &request, const NBSocketIO &socket_io,
-			   const Context &context) {
+void FundYieldsServer::Get(const Object &request, const Context &context) {
   redisContext *redis_context = context.RedisContext();
   Object funds{"[", "]"};
 
@@ -104,12 +103,11 @@ void FundYieldsServer::Get(const Object &request, const NBSocketIO &socket_io,
   string date = rr;
   Object response{"updated", date, "funds", funds};
 
-  HTTPResponse hr(response, kProtocol, 200, "OK", "");
-  hr.Send(socket_io);
+  HTTPResponse hr(response, kProtocol, 200, "OK", context.Origin());
+  hr.Send(context.GetSocketIO());
 }
 
-void FundYieldsServer::Set(const Object &request, const NBSocketIO &socket_io,
-			   const Context &context) {
+void FundYieldsServer::Set(const Object &request, const Context &context) {
   redisContext *redis_context = context.RedisContext();
   string date;
   if (request.Contains("updated")) {
@@ -135,11 +133,11 @@ void FundYieldsServer::Set(const Object &request, const NBSocketIO &socket_io,
   }
   Object response(successful_tickers);
   HTTPResponse hr(response, kProtocol, 200, "OK", "");
-  hr.Send(socket_io);
+  hr.Send(context.GetSocketIO());
 }
 
 void FundYieldsServer::HandleRequest(const std::string &in_uri, const Object &request,
-				  const NBSocketIO &socket_io, Context &context) {
+				     const NBSocketIO &socket_io, Context &context) {
   // In testing, we sometimes send API requests to /fundyields2/.
   string uri = in_uri;
   size_t start_pos = in_uri.find("/fundyields2/");
@@ -152,9 +150,9 @@ void FundYieldsServer::HandleRequest(const std::string &in_uri, const Object &re
   }
 
   if (uri == "/fundyields/api/get") {
-    Get(request, socket_io, context);
+    Get(request, context);
   } else if (uri == "/fundyields/api/set") {
-    Set(request, socket_io, context);
+    Set(request, context);
   } else {
     Warning("Unknown URI: %s\n", uri.c_str());
     // Might want to return status of 404 rather than 400 for this exception
@@ -173,10 +171,32 @@ void FundYieldsServer::HandleRequest(const NBSocketIO &socket_io, const ThreadDa
     return;
   }
 
+  const string &origin = http_request.Origin();
+
+  // An OPTIONS request is a preflight request sent to determine if a cross-origin request should
+  // be allowed.  We only permit cross-origin requests originating from localhost which are
+  // sometimes needed during development.
+  if (http_request.Method() == "OPTIONS") {
+    string localhost = "http://localhost";
+    auto res = std::mismatch(localhost.begin(), localhost.end(), origin.begin());
+    if (res.first == localhost.end()) {
+      HTTPSendOptionsResponseAccept(socket_io, kProtocol, origin);
+    } else {
+      string local_network = "http://192.168.";
+      auto res = std::mismatch(local_network.begin(), local_network.end(), origin.begin());
+      if (res.first == local_network.end()) {
+	HTTPSendOptionsResponseAccept(socket_io, kProtocol, origin);
+      } else {
+	HTTPSendOptionsResponseReject(socket_io, kProtocol);
+      }
+    }
+    return;
+  }
+
   const Object &request = http_request.Request();
   if (request.GetType() != ObjectValueType::OBJECT) {
     Warning("Expected JSON object in body of HTTP request\n");
-    HTTPResponse hr(kProtocol, 400, "Badly formed request", "", "");
+    HTTPResponse hr(kProtocol, 400, "Badly formed request", "", origin);
     hr.Send(socket_io);
     return;
   }
@@ -184,16 +204,16 @@ void FundYieldsServer::HandleRequest(const NBSocketIO &socket_io, const ThreadDa
   const FundYieldsThreadData &wr_thread_data =
     dynamic_cast<const FundYieldsThreadData &>(thread_data);
   redisContext *redis_context = wr_thread_data.RedisContext();
-  Context context(redis_context);
+  Context context(redis_context, socket_io, origin);
   try {
     HandleRequest(http_request.URI(), request, socket_io, context);
   } catch (UnknownURIException &e) {
     HTTPResponse hr(kProtocol, 404, e.what(), "", "");
-    hr.Send(socket_io);
+    hr.Send(context.GetSocketIO());
   } catch (exception &e) {
     Warning("Exception: %s\n", e.what());
     HTTPResponse hr(kProtocol, 500, e.what(), "", "");
-    hr.Send(socket_io);
+    hr.Send(context.GetSocketIO());
   }
 }
 

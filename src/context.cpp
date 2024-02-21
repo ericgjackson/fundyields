@@ -6,14 +6,15 @@
 #include <vector>
 
 #include "context.h"
+#include "okapi_socket_io.h"
 #include "okapi_text_processing.h"
 
 using namespace okapi;
 using std::string;
 using std::vector;
 
-Context::Context(redisContext *redis_context) {
-  redis_context_ = redis_context;
+Context::Context(redisContext *redis_context, const SocketIO &socket_io, const string &origin) :
+  redis_context_(redis_context), socket_io_(socket_io), origin_(origin) {
   major_api_version_ = 0;
   minor_api_version_ = 0;
 }
