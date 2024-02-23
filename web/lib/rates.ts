@@ -52,37 +52,38 @@ export const getRates = (
 
     let federalRate = 0;
     // Source: https://www.forbes.com/advisor/taxes/taxes-federal-income-tax-bracket
+    // Updated for 2024
     if (filingStatus === 'married_joint') {
-	if (taxableIncome <= 22000)       federalRate = 0.1;
-	else if (taxableIncome <= 89450)  federalRate = 0.12;
-	else if (taxableIncome <= 190750) federalRate = 0.22;
-	else if (taxableIncome <= 364200) federalRate = 0.24;
-	else if (taxableIncome <= 462500) federalRate = 0.32;
-	else if (taxableIncome <= 693750) federalRate = 0.35;
+	if (taxableIncome <= 23200)       federalRate = 0.1;
+	else if (taxableIncome <= 94300)  federalRate = 0.12;
+	else if (taxableIncome <= 201050) federalRate = 0.22;
+	else if (taxableIncome <= 383900) federalRate = 0.24;
+	else if (taxableIncome <= 487450) federalRate = 0.32;
+	else if (taxableIncome <= 731200) federalRate = 0.35;
 	else                              federalRate = 0.37;
     } else if (filingStatus === 'married_separate') {
-	if (taxableIncome <= 11000)       federalRate = 0.1;
-	else if (taxableIncome <= 44725)  federalRate = 0.12;
-	else if (taxableIncome <= 95375)  federalRate = 0.22;
-	else if (taxableIncome <= 182100) federalRate = 0.24;
-	else if (taxableIncome <= 231250) federalRate = 0.32;
-	else if (taxableIncome <= 346875) federalRate = 0.35;
+	if (taxableIncome <= 11600)       federalRate = 0.1;
+	else if (taxableIncome <= 47150)  federalRate = 0.12;
+	else if (taxableIncome <= 100525) federalRate = 0.22;
+	else if (taxableIncome <= 191950) federalRate = 0.24;
+	else if (taxableIncome <= 243725) federalRate = 0.32;
+	else if (taxableIncome <= 365600) federalRate = 0.35;
 	else                              federalRate = 0.37;
     } else if (filingStatus === 'single') {
-	if (taxableIncome <= 10275)       federalRate = 0.1;
-	else if (taxableIncome <= 41775)  federalRate = 0.12;
-	else if (taxableIncome <= 89075)  federalRate = 0.22;
-	else if (taxableIncome <= 170050) federalRate = 0.24;
-	else if (taxableIncome <= 215950) federalRate = 0.32;
-	else if (taxableIncome <= 539900) federalRate = 0.35;
+	if (taxableIncome <= 11600)       federalRate = 0.1;
+	else if (taxableIncome <= 47150)  federalRate = 0.12;
+	else if (taxableIncome <= 100525) federalRate = 0.22;
+	else if (taxableIncome <= 191950) federalRate = 0.24;
+	else if (taxableIncome <= 243725) federalRate = 0.32;
+	else if (taxableIncome <= 609350) federalRate = 0.35;
 	else                              federalRate = 0.37;
     } else if (filingStatus === 'head_of_household') {
-	if (taxableIncome <= 14650)       federalRate = 0.1;
-	else if (taxableIncome <= 55900)  federalRate = 0.12;
-	else if (taxableIncome <= 89050)  federalRate = 0.22;
-	else if (taxableIncome <= 170050) federalRate = 0.24;
-	else if (taxableIncome <= 215950) federalRate = 0.32;
-	else if (taxableIncome <= 539900) federalRate = 0.35;
+	if (taxableIncome <= 16550)       federalRate = 0.1;
+	else if (taxableIncome <= 63100)  federalRate = 0.12;
+	else if (taxableIncome <= 100500) federalRate = 0.22;
+	else if (taxableIncome <= 191950) federalRate = 0.24;
+	else if (taxableIncome <= 243700) federalRate = 0.32;
+	else if (taxableIncome <= 609350) federalRate = 0.35;
 	else                              federalRate = 0.37;
     }
 
@@ -91,49 +92,39 @@ export const getRates = (
 
     let stateRate = 0;
     if (state === 'california') {
-	if (filingStatus === 'single') {
-	    if (taxableIncome <= 10099)       stateRate = 0.01;
-	    else if (taxableIncome <= 23942)  stateRate = 0.02;
-	    else if (taxableIncome <= 37788)  stateRate = 0.04;
-	    else if (taxableIncome <= 52455)  stateRate = 0.06;
-	    else if (taxableIncome <= 66295)  stateRate = 0.08;
-	    else if (taxableIncome <= 338639) stateRate = 0.093;
-	    else if (taxableIncome <= 406364) stateRate = 0.103;
-	    else if (taxableIncome <= 677275) stateRate = 0.113;
+	if (filingStatus === 'single' || filingStatus === 'married_separate') {
+	    if (taxableIncome <= 10412)       stateRate = 0.01;
+	    else if (taxableIncome <= 24684)  stateRate = 0.02;
+	    else if (taxableIncome <= 38959)  stateRate = 0.04;
+	    else if (taxableIncome <= 54081)  stateRate = 0.06;
+	    else if (taxableIncome <= 68350)  stateRate = 0.08;
+	    else if (taxableIncome <= 349137) stateRate = 0.093;
+	    else if (taxableIncome <= 418961) stateRate = 0.103;
+	    else if (taxableIncome <= 698271) stateRate = 0.113;
 	    else                              stateRate = 0.123;
 	} else if (filingStatus === 'married_joint') {
-	    if (taxableIncome <= 20198)        stateRate = 0.01;
-	    else if (taxableIncome <= 47884)   stateRate = 0.02;
-	    else if (taxableIncome <= 75576)   stateRate = 0.04;
-	    else if (taxableIncome <= 104910)  stateRate = 0.06;
-	    else if (taxableIncome <= 132590)  stateRate = 0.08;
-	    else if (taxableIncome <= 677278)  stateRate = 0.093;
-	    else if (taxableIncome <= 812728)  stateRate = 0.103;
-	    else if (taxableIncome <= 1354550) stateRate = 0.113;
-	    else                               stateRate = 0.123;
-	} else if (filingStatus === 'married_separate') {
-	    if (taxableIncome <= 10099)        stateRate = 0.01;
-	    else if (taxableIncome <= 23942)   stateRate = 0.02;
-	    else if (taxableIncome <= 37788)   stateRate = 0.04;
-	    else if (taxableIncome <= 52455)   stateRate = 0.06;
-	    else if (taxableIncome <= 66295)   stateRate = 0.08;
-	    else if (taxableIncome <= 338639)  stateRate = 0.093;
-	    else if (taxableIncome <= 406364)  stateRate = 0.103;
-	    else if (taxableIncome <= 677275)  stateRate = 0.113;
+	    if (taxableIncome <= 20824)        stateRate = 0.01;
+	    else if (taxableIncome <= 49368)   stateRate = 0.02;
+	    else if (taxableIncome <= 77918)   stateRate = 0.04;
+	    else if (taxableIncome <= 108162)  stateRate = 0.06;
+	    else if (taxableIncome <= 136700)  stateRate = 0.08;
+	    else if (taxableIncome <= 698274)  stateRate = 0.093;
+	    else if (taxableIncome <= 837922)  stateRate = 0.103;
+	    else if (taxableIncome <= 1369542) stateRate = 0.113;
 	    else                               stateRate = 0.123;
 	} else if (filingStatus === 'head_of_household') {
-	    if (taxableIncome <= 20212)        stateRate = 0.01;
-	    else if (taxableIncome <= 47887)   stateRate = 0.02;
-	    else if (taxableIncome <= 61730)   stateRate = 0.04;
-	    else if (taxableIncome <= 76397)   stateRate = 0.06;
-	    else if (taxableIncome <= 90240)   stateRate = 0.08;
-	    else if (taxableIncome <= 460547)  stateRate = 0.093;
-	    else if (taxableIncome <= 552658)  stateRate = 0.103;
-	    else if (taxableIncome <= 921095)  stateRate = 0.113;
+	    if (taxableIncome <= 20839)        stateRate = 0.01;
+	    else if (taxableIncome <= 49371)   stateRate = 0.02;
+	    else if (taxableIncome <= 63644)   stateRate = 0.04;
+	    else if (taxableIncome <= 78765)   stateRate = 0.06;
+	    else if (taxableIncome <= 93037)   stateRate = 0.08;
+	    else if (taxableIncome <= 474824)  stateRate = 0.093;
+	    else if (taxableIncome <= 569790)  stateRate = 0.103;
+	    else if (taxableIncome <= 949649)  stateRate = 0.113;
 	    else                               stateRate = 0.123;
 	}
     } else if (state === 'new_york') {
-	if (filingStatus === 'single') {
+	if (filingStatus === 'single' || filingStatus === 'married_separate') {
 	    if (taxableIncome <= 8500)          stateRate = 0.04;
 	    else if (taxableIncome <= 11700)    stateRate = 0.045;
 	    else if (taxableIncome <= 13900)    stateRate = 0.0525;
@@ -153,15 +144,6 @@ export const getRates = (
 	    else if (taxableIncome <= 5000000)  stateRate = 0.0965;
 	    else if (taxableIncome <= 25000000) stateRate = 0.103;
 	    else                                stateRate = 0.109;
-	} else if (filingStatus === 'married_separate') {
-	    if (taxableIncome <= 8500)          stateRate = 0.04;
-	    else if (taxableIncome <= 11700)    stateRate = 0.045;
-	    else if (taxableIncome <= 13900)    stateRate = 0.0525;
-	    else if (taxableIncome <= 80650)    stateRate = 0.0585;
-	    else if (taxableIncome <= 215400)   stateRate = 0.0625;
-	    else if (taxableIncome <= 1077550)  stateRate = 0.0685;
-	    else if (taxableIncome <= 5000000)  stateRate = 0.0965;
-	    else if (taxableIncome <= 25000000) stateRate = 0.103;
 	    else                                stateRate = 0.109;
 	} else if (filingStatus === 'head_of_household') {
 	    if (taxableIncome <= 12800)         stateRate = 0.04;

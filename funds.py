@@ -3,13 +3,16 @@
 #   MCDXX (Blackrock)
 #   MOFXX (Federated Hermes).  Cannot find 7-day yield.
 #   FTXXX (Goldman Sachs)
+
+# Update with information from pages like this:
+#   https://www.schwabassetmanagement.com/resource/2023-supplementary-tax-information
 schwab_funds = [
     {
         'ticker': 'snsxx',
         'name': 'Schwab U.S. Treasury Money Fund - Investor Shares',
         'company': 'schwab',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.8404,
+        'us_govt_obligations': 0.9961,
         'cactny_qualified': True,
     },
     {
@@ -17,7 +20,7 @@ schwab_funds = [
         'name': 'Schwab Treasury Obligations Money Fund - Investor Shares',
         'company': 'schwab',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.6905,
+        'us_govt_obligations': 0.1121,
         'cactny_qualified': False,
     },
     {
@@ -25,7 +28,7 @@ schwab_funds = [
         'name': 'Schwab Government Money Fund - Investor Shares',
         'company': 'schwab',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.3727,
+        'us_govt_obligations': 0.2401,
         'cactny_qualified': False,
     },
     {
@@ -33,7 +36,7 @@ schwab_funds = [
         'name': 'Schwab Value Advantage Money Fund - Investor Shares',
         'company': 'schwab',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.0190,
+        'us_govt_obligations': 0.0005,
         'cactny_qualified': False,
     },
     {
@@ -76,7 +79,7 @@ schwab_funds = [
         'name': 'Schwab Short-Term Bond Index Fund',
         'company': 'schwab',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.4584,
+        'us_govt_obligations': 0.7206,
         'cactny_qualified': True,
     },
     {
@@ -84,11 +87,13 @@ schwab_funds = [
         'name': 'Schwab U.S. Aggregate Bond Index Fund',
         'company': 'schwab',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.2455,
+        'us_govt_obligations': 0.3821,
         'cactny_qualified': False,
     }
 ]
 
+# Update with information from pages like this:
+#   https://investor.vanguard.com/content/dam/retail/publicsite/en/documents/taxes/usgoin-2024.pdf
 vanguard_funds = [
     {
         'ticker': 'vctxx',
@@ -109,7 +114,7 @@ vanguard_funds = [
         'name': 'Vanguard Federal Money Market Fund',
         'company': 'vanguard',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.45,
+        'us_govt_obligations': 0.4937,
         'cactny_qualified': False,
     },
     {
@@ -117,7 +122,7 @@ vanguard_funds = [
         'name': 'Vanguard Treasury Money Market Fund',
         'company': 'vanguard',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.8,
+        'us_govt_obligations': 0.8006,
         'cactny_qualified': True,
     },
     {
@@ -147,7 +152,7 @@ vanguard_funds = [
         'name': 'Vanguard Total Bond Market Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.3475,
+        'us_govt_obligations': 0.3847,
         'cactny_qualified': False,
     },
     {
@@ -155,7 +160,7 @@ vanguard_funds = [
         'name': 'Vanguard Intermediate-Term Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.4392,
+        'us_govt_obligations': 0.4821,
         'cactny_qualified': True,
     },
     {
@@ -163,7 +168,7 @@ vanguard_funds = [
         'name': 'Vanguard Intermediate-Term Corporate Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.0039,
+        'us_govt_obligations': 0.0036,
         'cactny_qualified': False,
     },
     {
@@ -179,7 +184,7 @@ vanguard_funds = [
         'name': 'Vanguard Long-Term Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.3297,
+        'us_govt_obligations': 0.3747,
         'cactny_qualified': False,
     },
     {
@@ -187,7 +192,7 @@ vanguard_funds = [
         'name': 'Vanguard Long-Term Corporate Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.002,
+        'us_govt_obligations': 0.0022,
         'cactny_qualified': False,
     },
     {
@@ -195,7 +200,7 @@ vanguard_funds = [
         'name': 'Vanguard Mortgage-Backed Securities Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.0053,
+        'us_govt_obligations': 0.0139,
         'cactny_qualified': False,
     },
     {
@@ -203,7 +208,7 @@ vanguard_funds = [
         'name': 'Vanguard Short-Term Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.5736,
+        'us_govt_obligations': 0.6157,
         'cactny_qualified': True,
     },
     {
@@ -211,7 +216,7 @@ vanguard_funds = [
         'name': 'Vanguard Short-Term Corporate Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.0019,
+        'us_govt_obligations': 0.0045,
         'cactny_qualified': False,
     },
     {
@@ -234,14 +239,16 @@ vanguard_funds = [
         'name': 'Vanguard Total International Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.0012,
+        'us_govt_obligations': 0.003,
+        'cactny_qualified': False,
     },
     {
         'ticker': 'vgavx',
         'name': 'Vanguard Emerging Markets Government Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.0012,
+        'us_govt_obligations': 0.0025,
+        'cactny_qualified': False,
     },
     {
         'ticker': 'vyfxx',
@@ -252,6 +259,8 @@ vanguard_funds = [
     }
 ]
 
+# Update with information from pages like this:
+# https://www.fidelity.com/bin-public/060_www_fidelity_com/documents/TY23-GSE-Supplemental-Letter.pdf
 fidelity_funds = [
     {
         'ticker': 'flgxx',
@@ -259,7 +268,7 @@ fidelity_funds = [
         'name': 'Fidelity Flex Government Money Market Fund',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.3387,
+        'us_govt_obligations': 0.416,
         'cactny_qualified': False,
     },
     {
@@ -268,7 +277,7 @@ fidelity_funds = [
         'name': 'Fidelity Series Government Money Market Fund',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.4171,
+        'us_govt_obligations': 0.3604,
         'cactny_qualified': False,
     },
     {
@@ -285,7 +294,7 @@ fidelity_funds = [
         'name': 'Fidelity Money Market Fund - Premium Class',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0,
+        'us_govt_obligations': 0.0405,
         'cactny_qualified': False,
     },
     {
@@ -294,7 +303,7 @@ fidelity_funds = [
         'name': 'Fidelity Government Money Market Fund - Premium Class',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.529,
+        'us_govt_obligations': 0.4118,
         'cactny_qualified': False,
     },
     {
@@ -303,7 +312,7 @@ fidelity_funds = [
         'name': 'Fidelity Government Cash Reserves',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.548,
+        'us_govt_obligations': 0.4057,
         'cactny_qualified': False,
     },
     {
@@ -328,7 +337,7 @@ fidelity_funds = [
         'name': 'Fidelity Treasury Only Money Market Fund',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.9642,
+        'us_govt_obligations': 0.9039,
         'cactny_qualified': True,
     },
     {
@@ -337,7 +346,7 @@ fidelity_funds = [
         'name': 'Fidelity Treasury Money Market Fund',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.7454,
+        'us_govt_obligations': 0.2419,
         'cactny_qualified': False,
     },
     {
@@ -378,7 +387,7 @@ fidelity_funds = [
         'name': 'Fidelity Money Market Fund',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0,
+        'us_govt_obligations': 0.0405,
         'cactny_qualified': False,
     }
 ]
