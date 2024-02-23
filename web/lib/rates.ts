@@ -144,7 +144,6 @@ export const getRates = (
 	    else if (taxableIncome <= 5000000)  stateRate = 0.0965;
 	    else if (taxableIncome <= 25000000) stateRate = 0.103;
 	    else                                stateRate = 0.109;
-	    else                                stateRate = 0.109;
 	} else if (filingStatus === 'head_of_household') {
 	    if (taxableIncome <= 12800)         stateRate = 0.04;
 	    else if (taxableIncome <= 17650)    stateRate = 0.045;
