@@ -39,6 +39,7 @@ const Main: FunctionComponent<Props> = ({
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [windowHeight, setWindowHeight] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
+  const [serverError, setServerError] = useState(false);
   const inputRef1 = useMemo(() => createRef<HTMLInputElement>(), []);
   const inputRef2 = useMemo(() => createRef<HTMLInputElement>(), []);
   const deferredTaxableIncome = useDeferredValue(taxableIncome);
@@ -132,10 +133,12 @@ const Main: FunctionComponent<Props> = ({
       setMoneyMarket(mm);
       setFixedIncome(fi);
       setUpdated(results['updated']);
+      setServerError(false);
     })
     .catch((error) => {
       // dispatch(messageSlice.actions.set('Server error'));
       console.error('Server error');
+      setServerError(true);
     });
   }, []);
 
@@ -198,6 +201,13 @@ const Main: FunctionComponent<Props> = ({
             Last updated: <span id="updated">{updated}</span>
           </span>
         </div>
+
+        {
+	  serverError &&
+          <div className="mt-5">
+            <span className="font-serif font-bold text-lg text-red-500">Server Error</span>
+          </div>
+	}
 
         <div
 	  className="flex flex-col justify-left border border-black p-5 mt-5"
@@ -309,5 +319,4 @@ const Main: FunctionComponent<Props> = ({
   );
 };
 
-      
 export default Main;

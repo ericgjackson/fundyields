@@ -3,7 +3,7 @@
 COUNTER=0
 while true; do
   echo Launch count $COUNTER at `date`
-  /usr/local/bin/run_fundyields_server | /usr/local/bin/okapi_log_router /home/ubuntu/logs 30 LOG
+  /usr/local/bin/run_fundyields_server | /usr/local/bin/okapi_log_router /home/ubuntu/fundyields_logs 30 LOG
   sleep 1
   let COUNTER=COUNTER+1 
 done
