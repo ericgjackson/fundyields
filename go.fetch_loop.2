@@ -3,7 +3,7 @@
 COUNTER=0
 while true; do
   echo Launch count $COUNTER at `date`
-  python3 fetch_loop.py
+  python3 fetch_loop.py --host fundyields.com
   sleep 1
   let COUNTER=COUNTER+1 
 done

@@ -93,15 +93,16 @@ export const getRates = (
     let stateRate = 0;
     if (state === 'california') {
 	if (filingStatus === 'single' || filingStatus === 'married_separate') {
-	    if (taxableIncome <= 10412)       stateRate = 0.01;
-	    else if (taxableIncome <= 24684)  stateRate = 0.02;
-	    else if (taxableIncome <= 38959)  stateRate = 0.04;
-	    else if (taxableIncome <= 54081)  stateRate = 0.06;
-	    else if (taxableIncome <= 68350)  stateRate = 0.08;
-	    else if (taxableIncome <= 349137) stateRate = 0.093;
-	    else if (taxableIncome <= 418961) stateRate = 0.103;
-	    else if (taxableIncome <= 698271) stateRate = 0.113;
-	    else                              stateRate = 0.123;
+	    if (taxableIncome <= 10412)        stateRate = 0.01;
+	    else if (taxableIncome <= 24684)   stateRate = 0.02;
+	    else if (taxableIncome <= 38959)   stateRate = 0.04;
+	    else if (taxableIncome <= 54081)   stateRate = 0.06;
+	    else if (taxableIncome <= 68350)   stateRate = 0.08;
+	    else if (taxableIncome <= 349137)  stateRate = 0.093;
+	    else if (taxableIncome <= 418961)  stateRate = 0.103;
+	    else if (taxableIncome <= 698271)  stateRate = 0.113;
+	    else if (taxableIncome <= 1000000) stateRate = 0.123;
+	    else                               stateRate = 0.133;
 	} else if (filingStatus === 'married_joint') {
 	    if (taxableIncome <= 20824)        stateRate = 0.01;
 	    else if (taxableIncome <= 49368)   stateRate = 0.02;
@@ -110,8 +111,9 @@ export const getRates = (
 	    else if (taxableIncome <= 136700)  stateRate = 0.08;
 	    else if (taxableIncome <= 698274)  stateRate = 0.093;
 	    else if (taxableIncome <= 837922)  stateRate = 0.103;
-	    else if (taxableIncome <= 1369542) stateRate = 0.113;
-	    else                               stateRate = 0.123;
+	    else if (taxableIncome <= 1000000) stateRate = 0.113;
+	    else if (taxableIncome <= 1369542) stateRate = 0.123;
+	    else                               stateRate = 0.133;
 	} else if (filingStatus === 'head_of_household') {
 	    if (taxableIncome <= 20839)        stateRate = 0.01;
 	    else if (taxableIncome <= 49371)   stateRate = 0.02;
@@ -121,7 +123,8 @@ export const getRates = (
 	    else if (taxableIncome <= 474824)  stateRate = 0.093;
 	    else if (taxableIncome <= 569790)  stateRate = 0.103;
 	    else if (taxableIncome <= 949649)  stateRate = 0.113;
-	    else                               stateRate = 0.123;
+	    else if (taxableIncome <= 1000000) stateRate = 0.123;
+	    else                               stateRate = 0.133;
 	}
     } else if (state === 'new_york') {
 	if (filingStatus === 'single' || filingStatus === 'married_separate') {
