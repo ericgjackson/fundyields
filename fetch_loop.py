@@ -36,8 +36,8 @@ def main():
         # Process if:
         # 1) We have just started the program.  Do this no matter what time of day it is.
         # 2) We are on a different date (in UTC time) from the last time we fetched and the hour is
-        #    >= 16.
-        do_fetch = last_day == '' or (day != last_day and now.hour >= 16)
+        #    >= 15.
+        do_fetch = last_day == '' or (day != last_day and now.hour >= 15)
         if do_fetch:
             fetch(remote_host)
             last_day = now.strftime('%Y-%m-%d')
