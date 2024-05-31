@@ -149,15 +149,37 @@ def get_sec_yield_schwab(driver, ticker):
     
     return -1
 
+def get_sec_yield_fun(driver, ticker):
+    url = f'https://moneymarket.fun/d/{ticker}'
+
+    try:
+        driver.get(url)
+    except TimeoutException:
+        print(f'Timeout trying to fetch URL: {url}')
+        return -1
+
+    # print(driver.page_source)
+
+    try:
+        div = driver.find_element(By.CLASS_NAME, 'stat-value')
+    except NoSuchElementException:
+        print("Could not find stat-value div");
+        return -1
+
+    return parse_percentage(div.text)
+
 def get_sec_yield(driver, fund):
-    tail = fund.get('tail', fund['ticker'])
+    ticker = fund['ticker']
+    # tail = fund.get('tail', ticker)
     company = fund['company']
     if company == 'vanguard':
-        sec_yield = get_sec_yield_vanguard(driver, tail)
+        sec_yield = get_sec_yield_vanguard(driver, ticker)
     elif company == 'fidelity':
-        sec_yield = get_sec_yield_fidelity(driver, tail, fund)
+        # sec_yield = get_sec_yield_fidelity(driver, tail, fund)
+        sec_yield = get_sec_yield_fun(driver, ticker)
     elif company == 'schwab':
-        sec_yield = get_sec_yield_schwab(driver, tail)
+        # sec_yield = get_sec_yield_schwab(driver, tail)
+        sec_yield = get_sec_yield_fun(driver, ticker)
     else:
         print(f'Unknown company: {company}')
         sec_yield = -1
@@ -165,6 +187,8 @@ def get_sec_yield(driver, fund):
     sys.stdout.flush()
     return sec_yield
 
+# This is the URL displayed to the user on the website.  For Fidelity and Schwab, it is not the
+# URL we fetch the yield from.
 def get_url(fund, tail):
     if fund['company'] == 'vanguard':
         return f'https://investor.vanguard.com/investment-products/mutual-funds/profile/{tail}'

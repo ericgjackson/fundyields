@@ -66,7 +66,11 @@ schwab_funds = [
         'company': 'schwab',
         'asset_class': 'money_market',
         'exempt': ['new_york', 'federal'],
-    },
+    }
+]
+
+# Commenting out the bond funds for now.  moneymarket.fun does not support them.
+"""
     {
         'ticker': 'swcax',
         'name': 'Schwab California Tax-Free Bond Fund',
@@ -90,7 +94,7 @@ schwab_funds = [
         'us_govt_obligations': 0.3821,
         'cactny_qualified': False,
     }
-]
+"""
 
 # Update with information from pages like this:
 #   https://investor.vanguard.com/content/dam/retail/publicsite/en/documents/taxes/usgoin-2024.pdf
@@ -281,14 +285,6 @@ fidelity_funds = [
         'cactny_qualified': False,
     },
     {
-        'ticker': 'fmndx',
-        'tail': '316203843',
-        'name': 'Fidelity Conservative Income Municipal Bond Fund',
-        'company': 'fidelity',
-        'asset_class': 'fixed_income',
-        'exempt': ['federal'],
-    },
-    {
         'ticker': 'fzdxx',
         'tail': '31617H805',
         'name': 'Fidelity Money Market Fund - Premium Class',
@@ -391,5 +387,17 @@ fidelity_funds = [
         'cactny_qualified': False,
     }
 ]
+
+# Commenting out the bond funds for now.  moneymarket.fun does not support them.
+"""
+    {
+        'ticker': 'fmndx',
+        'tail': '316203843',
+        'name': 'Fidelity Conservative Income Municipal Bond Fund',
+        'company': 'fidelity',
+        'asset_class': 'fixed_income',
+        'exempt': ['federal'],
+    },
+"""
 
 funds = vanguard_funds + schwab_funds + fidelity_funds
