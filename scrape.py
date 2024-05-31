@@ -120,7 +120,16 @@ def get_sec_yield_schwab(driver, ticker):
         print(f'Timeout trying to fetch URL: {url}')
         return -1
 
-    div = driver.find_element(By.ID, 'sfm-table--yields')
+    # For debugging
+    # page_source = driver.page_source
+    # print(page_source)
+
+    try:
+        div = driver.find_element(By.ID, 'sfm-table--yields')
+    except NoSuchElementException:
+        print("Could not find sfm-table--yields div");
+        return -1
+
     tr_elements = div.find_elements(By.XPATH, './/tr[*]')
     for tr_element in tr_elements:
         th_element = tr_element.find_element(By.XPATH, './th[1]')
