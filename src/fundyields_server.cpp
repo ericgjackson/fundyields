@@ -1,5 +1,3 @@
-#include <hiredis/hiredis.h>
-
 #include <exception>
 #include <memory>
 #include <string>
@@ -42,7 +40,7 @@ UnknownURIException::UnknownURIException(const string &uri) {
 }
 
 void FundYieldsServer::Get(const Object &request, const Context &context) {
-  redisContext *redis_context = context.RedisContext();
+  RedisContext &redis_context = context.GetRedisContext();
   Object funds{"[", "]"};
 
   int cursor = 0;
@@ -108,7 +106,7 @@ void FundYieldsServer::Get(const Object &request, const Context &context) {
 }
 
 void FundYieldsServer::Set(const Object &request, const Context &context) {
-  redisContext *redis_context = context.RedisContext();
+  RedisContext &redis_context = context.GetRedisContext();
   string date;
   if (request.Contains("updated")) {
     date = (string)request["updated"];
@@ -203,7 +201,7 @@ void FundYieldsServer::HandleRequest(const NBSocketIO &socket_io, const ThreadDa
 
   const FundYieldsThreadData &wr_thread_data =
     dynamic_cast<const FundYieldsThreadData &>(thread_data);
-  redisContext *redis_context = wr_thread_data.RedisContext();
+  RedisContext &redis_context = wr_thread_data.GetRedisContext();
   Context context(redis_context, socket_io, origin);
   try {
     HandleRequest(http_request.URI(), request, socket_io, context);
@@ -221,16 +219,12 @@ static const char *kRedisHost = "localhost";
 static const int kRedisPort = 6379;
 
 FundYieldsThreadData::FundYieldsThreadData(void) {
-  struct timeval timeout = { 1, 500000 }; // 1.5 seconds
-  redis_context_ = redisConnectWithTimeout(kRedisHost, kRedisPort, timeout);
-  if (redis_context_ == nullptr || redis_context_->err) {
-    if (redis_context_) {
-      FatalError("Redis connection error: %s\n", redis_context_->errstr);
-    } else {
-      FatalError("Redis connection error: cannot allocate redis context\n");
-    }
+  try {
+    redis_context_ = std::make_unique<RedisContext>(kRedisHost, kRedisPort);
+  } catch (exception &e) {
+    FatalError("%s\n", e.what());
   }
-  RedisResponse rr(redis_context_, "SELECT %i", kRedisDB);
+  RedisResponse rr(*redis_context_, "SELECT %i", kRedisDB);
   string response = rr;
   if (response != "OK") {
     FatalError("Redis SELECT %i yielded response %s\n", kRedisDB, response.c_str());
@@ -238,7 +232,6 @@ FundYieldsThreadData::FundYieldsThreadData(void) {
 }
 
 FundYieldsThreadData::~FundYieldsThreadData(void) {
-  redisFree(redis_context_);
 }
 
 unique_ptr<ThreadData> FundYieldsServer::GenerateThreadData(void) {

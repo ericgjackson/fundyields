@@ -7,17 +7,16 @@
 #include "context.h"
 #include "okapi_nb_socket_io.h"
 #include "okapi_object.h"
+#include "okapi_redis.h"
 #include "okapi_server.h"
-
-class redisContext;
 
 class FundYieldsThreadData : public okapi::ThreadData {
 public:
   FundYieldsThreadData(void);
   ~FundYieldsThreadData(void);
-  redisContext *RedisContext(void) const {return redis_context_;}
+  okapi::RedisContext &GetRedisContext(void) const {return *redis_context_;}
 private:
-  redisContext *redis_context_;
+  std::unique_ptr<okapi::RedisContext> redis_context_;
 };
 
 class FundYieldsServer : public okapi::Server {
