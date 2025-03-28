@@ -7,7 +7,10 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 def get_chromium_driver():
     # Create a ChromeOptions object to configure the headless browser
     chromium_options = ChromeOptions()
-    chromium_options.BinaryLocation = "/usr/bin/chromium-browser"
+    # Used to do this:
+    # chromium_options.BinaryLocation = "/usr/bin/chromium-browser"
+    # But this now works:
+    chromium_options.binary_location = "/usr/bin/chromium-browser"
     chromium_options.add_argument('--headless')
     # This is needed.  Fidelity doesn't want to accept bot requests and just times out.
     chromium_options.add_argument(
@@ -15,7 +18,10 @@ def get_chromium_driver():
 
     # Create a Chrome driver with the options we just created
     # driver = webdriver.Chrome(options=chrome_options)
-    driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=chromium_options)
+    # I used to do this, but executable_path seems to be no longer supported.  Instead
+    # chromedriver should be in your path.
+    # driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=chromium_options)
+    driver = webdriver.Chrome(options=chromium_options)
     # 10 seconds was not enough in local testing
     driver.set_page_load_timeout(30)
     

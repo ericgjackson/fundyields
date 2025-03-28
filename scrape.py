@@ -238,6 +238,11 @@ def scrape_all_funds(driver, remote_host, r, scrape_funds):
         today = datetime.today().strftime('%Y-%m-%d')
         request = {'api': '1.0', 'updated': today, 'funds': records}
         headers = {'Content-Type': 'application/json'}
+        # Need to catch exceptions here for:
+        # 1) fundyields.com being down
+        # 2) My home wifi being down
+        # What's the exception to catch?  I see this in the output:
+        #   requests.exceptions.ConnectionError
         response = requests.post(f'https://{remote_host}/fundyields/api/set',
                            data=json.dumps(request), headers=headers)
         print(response.status_code)

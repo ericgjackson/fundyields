@@ -4,11 +4,15 @@
 # Another way to compare date differences:
 #   delta = now - last_date
 #   print(delta.days)
+#
+# Comment from python now:
+#   /home/eric/fundyields/fetch_loop.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+# Fixed?
 
 import sys
 import argparse
-from datetime import datetime
-import redis
+from datetime import datetime, timezone
+# import redis
 import time
 from driver import get_driver
 from scrape import scrape_all_funds_with_retries
@@ -18,7 +22,9 @@ def fetch(remote_host):
     if remote_host:
         r = None
     else:
-        r = redis.Redis(host='localhost', port=6379, db=5)
+        # r = redis.Redis(host='localhost', port=6379, db=5)
+        print('No remote host not supported yet; need to install Redis module')
+        sys.exit(-1)
     failures = scrape_all_funds_with_retries(driver, remote_host, r, 3)
     print(f'Failures: {failures}')
     sys.stdout.flush()
@@ -31,7 +37,9 @@ def main():
     remote_host = args.host
     last_day = ''
     while True:
-        now = datetime.utcnow()
+        # Old
+        # now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         day = now.strftime('%Y-%m-%d')
         # Process if:
         # 1) We have just started the program.  Do this no matter what time of day it is.
