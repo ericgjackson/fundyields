@@ -12,8 +12,9 @@ using namespace okapi;
 using std::string;
 using std::vector;
 
-Context::Context(RedisContext &redis_context, const SocketIO &socket_io, const string &origin) :
-  redis_context_(redis_context), socket_io_(socket_io), origin_(origin) {
+Context::Context(RedisConnection &redis_connection, const SocketIO &socket_io,
+		 const string &origin) :
+  redis_connection_(redis_connection), socket_io_(socket_io), origin_(origin) {
   major_api_version_ = 0;
   minor_api_version_ = 0;
 }

@@ -149,6 +149,7 @@ def get_sec_yield_schwab(driver, ticker):
     
     return -1
 
+# moneymarket.fun is down, maybe for good
 def get_sec_yield_fun(driver, ticker):
     url = f'https://moneymarket.fun/d/{ticker}'
 
@@ -170,16 +171,18 @@ def get_sec_yield_fun(driver, ticker):
 
 def get_sec_yield(driver, fund):
     ticker = fund['ticker']
-    # tail = fund.get('tail', ticker)
+    tail = fund.get('tail', ticker)
     company = fund['company']
     if company == 'vanguard':
         sec_yield = get_sec_yield_vanguard(driver, ticker)
     elif company == 'fidelity':
-        # sec_yield = get_sec_yield_fidelity(driver, tail, fund)
-        sec_yield = get_sec_yield_fun(driver, ticker)
+        sec_yield = get_sec_yield_fidelity(driver, tail, fund)
+        # moneymarket.fun is down, maybe for good
+        # sec_yield = get_sec_yield_fun(driver, ticker)
     elif company == 'schwab':
-        # sec_yield = get_sec_yield_schwab(driver, tail)
-        sec_yield = get_sec_yield_fun(driver, ticker)
+        sec_yield = get_sec_yield_schwab(driver, tail)
+        # moneymarket.fun is down, maybe for good
+        # sec_yield = get_sec_yield_fun(driver, ticker)
     else:
         print(f'Unknown company: {company}')
         sec_yield = -1

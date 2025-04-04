@@ -9,16 +9,16 @@
 
 class Context {
  public:
-  Context(okapi::RedisContext &redis_context, const okapi::SocketIO &socket_io,
+  Context(okapi::RedisConnection &redis_connection, const okapi::SocketIO &socket_io,
 	  const std::string &origin);
   void SetAPIVersion(const std::string &v);
-  okapi::RedisContext &GetRedisContext(void) const {return redis_context_;}
+  okapi::RedisConnection &GetRedisConnection(void) const {return redis_connection_;}
   const okapi::SocketIO &GetSocketIO(void) const {return socket_io_;}
   const std::string &Origin(void) const {return origin_;}
   int MajorAPIVersion(void) const {return major_api_version_;}
   int MinorAPIVersion(void) const {return minor_api_version_;}
  private:
-  okapi::RedisContext &redis_context_;
+  okapi::RedisConnection &redis_connection_;
   const okapi::SocketIO &socket_io_;
   std::string origin_;
   int major_api_version_;

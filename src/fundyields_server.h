@@ -14,9 +14,9 @@ class FundYieldsThreadData : public okapi::ThreadData {
 public:
   FundYieldsThreadData(void);
   ~FundYieldsThreadData(void);
-  okapi::RedisContext &GetRedisContext(void) const {return *redis_context_;}
+  okapi::RedisConnection &GetRedisConnection(void) const {return *redis_connection_;}
 private:
-  std::unique_ptr<okapi::RedisContext> redis_context_;
+  std::unique_ptr<okapi::RedisConnection> redis_connection_;
 };
 
 class FundYieldsServer : public okapi::Server {

@@ -40,12 +40,12 @@ UnknownURIException::UnknownURIException(const string &uri) {
 }
 
 void FundYieldsServer::Get(const Object &request, const Context &context) {
-  RedisContext &redis_context = context.GetRedisContext();
+  RedisConnection &redis_connection = context.GetRedisConnection();
   Object funds{"[", "]"};
 
   int cursor = 0;
   do {
-    RedisResponse rr(redis_context, "SCAN %i MATCH *", cursor);
+    RedisResponse rr(redis_connection, "SCAN %i MATCH *", cursor);
     const redisReply *reply = rr.Reply();
     if (! reply) {
       Warning("SCAN failed\n");
@@ -88,7 +88,7 @@ void FundYieldsServer::Get(const Object &request, const Context &context) {
       }
       string key = element->str;
       if (key == "updated") continue;
-      RedisResponse rr(redis_context, "GET %s", key.c_str());
+      RedisResponse rr(redis_connection, "GET %s", key.c_str());
       string data = rr;
       Object fund = Object::FromJSON(data);
       // Add the ticker as a field to the object representing the fund
@@ -97,7 +97,7 @@ void FundYieldsServer::Get(const Object &request, const Context &context) {
     }
   } while (cursor != 0);
 
-  RedisResponse rr(redis_context, "GET updated");
+  RedisResponse rr(redis_connection, "GET updated");
   string date = rr;
   Object response{"updated", date, "funds", funds};
 
@@ -106,12 +106,12 @@ void FundYieldsServer::Get(const Object &request, const Context &context) {
 }
 
 void FundYieldsServer::Set(const Object &request, const Context &context) {
-  RedisContext &redis_context = context.GetRedisContext();
+  RedisConnection &redis_connection = context.GetRedisConnection();
   string date;
   if (request.Contains("updated")) {
     date = (string)request["updated"];
     try {
-      RedisResponse rr(redis_context, "SET updated %s", date.c_str());
+      RedisResponse rr(redis_connection, "SET updated %s", date.c_str());
     } catch (RedisException &e) {
       Warning("Exception %s setting updated %s\n", e.what(), date.c_str());
     }
@@ -123,7 +123,7 @@ void FundYieldsServer::Set(const Object &request, const Context &context) {
     const auto &fund = funds[i];
     const string &ticker = fund["ticker"];
     try {
-      RedisResponse rr(redis_context, "SET %s %s", ticker.c_str(), fund.JSON().c_str());
+      RedisResponse rr(redis_connection, "SET %s %s", ticker.c_str(), fund.JSON().c_str());
       successful_tickers.push_back(ticker);
     } catch (RedisException &e) {
       Warning("Exception %s setting ticker %s\n", e.what(), ticker.c_str());
@@ -201,8 +201,8 @@ void FundYieldsServer::HandleRequest(const NBSocketIO &socket_io, const ThreadDa
 
   const FundYieldsThreadData &wr_thread_data =
     dynamic_cast<const FundYieldsThreadData &>(thread_data);
-  RedisContext &redis_context = wr_thread_data.GetRedisContext();
-  Context context(redis_context, socket_io, origin);
+  RedisConnection &redis_connection = wr_thread_data.GetRedisConnection();
+  Context context(redis_connection, socket_io, origin);
   try {
     HandleRequest(http_request.URI(), request, socket_io, context);
   } catch (UnknownURIException &e) {
@@ -220,14 +220,9 @@ static const int kRedisPort = 6379;
 
 FundYieldsThreadData::FundYieldsThreadData(void) {
   try {
-    redis_context_ = std::make_unique<RedisContext>(kRedisHost, kRedisPort);
+    redis_connection_ = std::make_unique<RedisConnection>(kRedisHost, kRedisPort, kRedisDB);
   } catch (exception &e) {
     FatalError("%s\n", e.what());
-  }
-  RedisResponse rr(*redis_context_, "SELECT %i", kRedisDB);
-  string response = rr;
-  if (response != "OK") {
-    FatalError("Redis SELECT %i yielded response %s\n", kRedisDB, response.c_str());
   }
 }
 
