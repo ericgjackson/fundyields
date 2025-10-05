@@ -187,7 +187,9 @@ const HelpModal: FunctionComponent<Props> = ({
 
               <li>Yields are scraped from the websites of Fidelity, Schwab and Vanguard.</li>
 
-              <li>We can only calculate state taxes for California and New York currently.</li>
+              <li>We can only calculate state taxes for California, New York and Florida currently.
+	          If you live in a different state that has no state tax, you can select Florida as
+		  your state and get numbers that are correct.</li>
   
               <li>We do not take account of the federal tax deduction you may be entitled to
 	          for state and local taxes (which is limited to $10,000 in any case).</li>
