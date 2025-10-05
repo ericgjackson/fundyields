@@ -1,6 +1,7 @@
 // TODO: make this a set
 const states = [
     'california',
+    'florida',
     'massachusetts',
     'new_jersey',
     'new_york'

@@ -126,6 +126,8 @@ export const getRates = (
 	    else if (taxableIncome <= 1000000) stateRate = 0.123;
 	    else                               stateRate = 0.133;
 	}
+    } else if (state === 'florida') {
+        stateRate = 0;
     } else if (state === 'new_york') {
 	if (filingStatus === 'single' || filingStatus === 'married_separate') {
 	    if (taxableIncome <= 8500)          stateRate = 0.04;

@@ -47,6 +47,7 @@ const Main: FunctionComponent<Props> = ({
 
   const getStateLabel = (value: string|null) => {
     if (value === 'california')    return 'California';
+    else if (value === 'florida')  return 'Florida';
     else if (value === 'new_york') return 'New York';
     else if (value === 'other')    return 'Other';
     else                           return null;
@@ -61,6 +62,7 @@ const Main: FunctionComponent<Props> = ({
   
   const stateOptions = [
     { value: 'california', label: getStateLabel('california') },
+    { value: 'florida', label: getStateLabel('florida') },
     { value: 'new_york', label: getStateLabel('new_york') },
     { value: 'other', label: getStateLabel('other') }
   ];
