@@ -12,7 +12,7 @@ schwab_funds = [
         'name': 'Schwab U.S. Treasury Money Fund - Investor Shares',
         'company': 'schwab',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.9961,
+        'us_govt_obligations': 0.9999,
         'cactny_qualified': True,
     },
     {
@@ -20,7 +20,7 @@ schwab_funds = [
         'name': 'Schwab Treasury Obligations Money Fund - Investor Shares',
         'company': 'schwab',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.1121,
+        'us_govt_obligations': 0.3207,
         'cactny_qualified': False,
     },
     {
@@ -28,15 +28,16 @@ schwab_funds = [
         'name': 'Schwab Government Money Fund - Investor Shares',
         'company': 'schwab',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.2401,
+        'us_govt_obligations': 0.333,
         'cactny_qualified': False,
     },
     {
         'ticker': 'swvxx',
-        'name': 'Schwab Value Advantage Money Fund - Investor Shares',
+        'name': 'Schwab Prime Advantage Money Fund - Investor Shares',
         'company': 'schwab',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.0005,
+        # Cannot find in Schwab documents
+        # 'us_govt_obligations': 0.0005,
         'cactny_qualified': False,
     },
     {
@@ -118,7 +119,7 @@ vanguard_funds = [
         'name': 'Vanguard Federal Money Market Fund',
         'company': 'vanguard',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.4937,
+        'us_govt_obligations': 0.5987,
         'cactny_qualified': False,
     },
     {
@@ -126,7 +127,7 @@ vanguard_funds = [
         'name': 'Vanguard Treasury Money Market Fund',
         'company': 'vanguard',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.8006,
+        'us_govt_obligations': 1.0,
         'cactny_qualified': True,
     },
     {
@@ -156,7 +157,7 @@ vanguard_funds = [
         'name': 'Vanguard Total Bond Market Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.3847,
+        'us_govt_obligations': 0.4192,
         'cactny_qualified': False,
     },
     {
@@ -164,7 +165,7 @@ vanguard_funds = [
         'name': 'Vanguard Intermediate-Term Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.4821,
+        'us_govt_obligations': 0.4913,
         'cactny_qualified': True,
     },
     {
@@ -172,7 +173,7 @@ vanguard_funds = [
         'name': 'Vanguard Intermediate-Term Corporate Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.0036,
+        'us_govt_obligations': 0.0037,
         'cactny_qualified': False,
     },
     {
@@ -188,7 +189,7 @@ vanguard_funds = [
         'name': 'Vanguard Long-Term Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.3747,
+        'us_govt_obligations': 0.4184,
         'cactny_qualified': False,
     },
     {
@@ -196,7 +197,7 @@ vanguard_funds = [
         'name': 'Vanguard Long-Term Corporate Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.0022,
+        'us_govt_obligations': 0.0032,
         'cactny_qualified': False,
     },
     {
@@ -204,7 +205,7 @@ vanguard_funds = [
         'name': 'Vanguard Mortgage-Backed Securities Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.0139,
+        'us_govt_obligations': 0.0146,
         'cactny_qualified': False,
     },
     {
@@ -212,7 +213,7 @@ vanguard_funds = [
         'name': 'Vanguard Short-Term Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.6157,
+        'us_govt_obligations': 0.6546,
         'cactny_qualified': True,
     },
     {
@@ -220,7 +221,7 @@ vanguard_funds = [
         'name': 'Vanguard Short-Term Corporate Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.0045,
+        'us_govt_obligations': 0.005,
         'cactny_qualified': False,
     },
     {
@@ -243,7 +244,7 @@ vanguard_funds = [
         'name': 'Vanguard Total International Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.003,
+        'us_govt_obligations': 0.0055,
         'cactny_qualified': False,
     },
     {
@@ -251,7 +252,7 @@ vanguard_funds = [
         'name': 'Vanguard Emerging Markets Government Bond Index Fund Admiral Shares',
         'company': 'vanguard',
         'asset_class': 'fixed_income',
-        'us_govt_obligations': 0.0025,
+        'us_govt_obligations': 0.0019,
         'cactny_qualified': False,
     },
     {
@@ -272,7 +273,7 @@ fidelity_funds = [
         'name': 'Fidelity Flex Government Money Market Fund',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.416,
+        'us_govt_obligations': 0.6443,
         'cactny_qualified': False,
     },
     {
@@ -281,7 +282,7 @@ fidelity_funds = [
         'name': 'Fidelity Series Government Money Market Fund',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.3604,
+        'us_govt_obligations': 0.5837,
         'cactny_qualified': False,
     },
     {
@@ -290,7 +291,7 @@ fidelity_funds = [
         'name': 'Fidelity Money Market Fund - Premium Class',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.0405,
+        'us_govt_obligations': 0.1552,
         'cactny_qualified': False,
     },
     {
@@ -299,7 +300,7 @@ fidelity_funds = [
         'name': 'Fidelity Government Money Market Fund - Premium Class',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.4118,
+        'us_govt_obligations': 0.5509,
         'cactny_qualified': False,
     },
     {
@@ -308,7 +309,7 @@ fidelity_funds = [
         'name': 'Fidelity Government Cash Reserves',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.4057,
+        'us_govt_obligations': 0.5719,
         'cactny_qualified': False,
     },
     {
@@ -333,7 +334,7 @@ fidelity_funds = [
         'name': 'Fidelity Treasury Only Money Market Fund',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.9039,
+        'us_govt_obligations': 0.97,
         'cactny_qualified': True,
     },
     {
@@ -342,7 +343,7 @@ fidelity_funds = [
         'name': 'Fidelity Treasury Money Market Fund',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.2419,
+        'us_govt_obligations': 0.5056,
         'cactny_qualified': False,
     },
     {
@@ -383,9 +384,18 @@ fidelity_funds = [
         'name': 'Fidelity Money Market Fund',
         'company': 'fidelity',
         'asset_class': 'money_market',
-        'us_govt_obligations': 0.0405,
+        'us_govt_obligations': 0.1552,
         'cactny_qualified': False,
-    }
+    },
+    {
+        'ticker': 'spaxx',
+        'tail': '31617H102',
+        'name': 'Fidelity Government Money Market Fund',
+        'company': 'fidelity',
+        'asset_class': 'money_market',
+        'us_govt_obligations': 0.5509,
+        'cactny_qualified': True,
+    },
 ]
 
 # Commenting out the bond funds for now.  moneymarket.fun does not support them.
